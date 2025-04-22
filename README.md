@@ -62,6 +62,8 @@ $label = (new Text)->setColor($color)->setText("This is a text")->setSize(5);
 $new_image->add($label);
 ```
 
+![Text](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/text.png?raw=true "Text")
+
 #### Line
 
 ```php

@@ -61,6 +61,9 @@ class FigureCommand extends UseCases
 
         switch (strtolower($request->getAttribute('figure'))) {
             default:
+            case 'text':
+                $polygon = (new Text)->setColor($color)->setText("This is a text")->setSize(5);
+                break;
             case 'line':
                 $polygon = (new Line)->setColor($color)
                     ->setStartCoordinates((new Coordinates)->setX(15)->setY(25))
