@@ -1,0 +1,52 @@
+{
+    "name": "juanchosl/imagetools",
+    "description": "Little methods collection in order to create and modify imges",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/JuanchoSL/ImageTools",
+    "minimum-stability": "dev",
+    "keywords": [
+        "image",
+        "images"
+    ],
+    "authors": [
+        {
+            "name": "Juan Sánchez Lecegui",
+            "email": "JuanchoSL@hotmail.com",
+            "homepage": "https://github.com/JuanchoSL/"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/juanchosl/requestlistener"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-gd": "*",
+        "juanchosl/validators": "*",
+        "juanchosl/exceptions": "*"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "1.12.*",
+        "phpunit/phpunit": "9.6.*",
+        "juanchosl/logger": "*",
+        "juanchosl/requestlistener": "dev-master",
+        "juanchosl/datatransfer": "1.0.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "JuanchoSL\\ImageTools\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JuanchoSL\\ImageTools\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "tests": "vendor/bin/phpunit --configuration phpunit.xml tests",
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon"
+    }
+}
