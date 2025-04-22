@@ -1,13 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace JuanchoSL\ImageTools\Engines;
+namespace JuanchoSL\ImageTools\Formats;
 
-class XbmImage extends AbstractImage
+use JuanchoSL\ImageTools\Contracts\WriteableInterface;
+
+class PngImage extends AbstractImage implements WriteableInterface
 {
 
     public static function read(string $filepath)
     {
-        return imagecreatefromxbm($filepath);
+        return imagecreatefrompng($filepath);
     }
 
     public function save(string &$filepath): bool
@@ -15,14 +17,14 @@ class XbmImage extends AbstractImage
         if (pathinfo($filepath, PATHINFO_EXTENSION) !== $this->getExtension()) {
             $filepath .= '.' . $this->getExtension();
         }
-        return imagexbm($this->modified, $filepath, 100);
+        return imagepng($this->modified, $filepath, 9);
     }
     public function getExtension(): string
     {
-        return image_type_to_extension(IMAGETYPE_XBM, false);
+        return image_type_to_extension(IMAGETYPE_PNG, false);
     }
     public function getMimetype(): string
     {
-        return image_type_to_mime_type(IMAGETYPE_XBM);
+        return image_type_to_mime_type(IMAGETYPE_PNG);
     }
 }

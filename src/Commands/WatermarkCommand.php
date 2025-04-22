@@ -4,10 +4,10 @@ namespace JuanchoSL\ImageTools\Commands;
 
 use JuanchoSL\HttpData\Factories\StreamFactory;
 use JuanchoSL\ImageTools\Dtos\Color;
-use JuanchoSL\ImageTools\Dtos\Text;
 use JuanchoSL\ImageTools\Dtos\TextLabel;
-use JuanchoSL\ImageTools\Engines\PngImage;
-use JuanchoSL\ImageTools\Engines\StringImage;
+use JuanchoSL\ImageTools\Elements\Text;
+use JuanchoSL\ImageTools\Formats\PngImage;
+use JuanchoSL\ImageTools\Formats\StringImage;
 use JuanchoSL\ImageTools\ImageToolsFactory;
 use JuanchoSL\ImageTools\ValueObjects\ColorLevel;
 use JuanchoSL\ImageTools\ValueObjects\TransparencyLevel;
@@ -40,17 +40,17 @@ class WatermarkCommand extends UseCases
         }
         if (!empty($request->getAttribute('mark'))) {
             $color = (new Color)
-                ->setRed(new ColorLevel())
-                ->setGreen(new ColorLevel())
-                ->setBlue(new ColorLevel())
+                ->setRed(new ColorLevel(255))
+                ->setGreen(new ColorLevel(255))
+                ->setBlue(new ColorLevel(255))
                 ->setAlpha(
                     new TransparencyLevel(64)
                 );
             $label = (new Text)
                 ->setColor($color)
                 ->setText($request->getAttribute('mark'))
-                //->setFont(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'ididthis.ttf')
-                ->setSize(5);
+                ->setFont(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'ididthis.ttf')
+                ->setSize(18);
             $image->add($label);
         }
         if (!empty($request->getAttribute('grey'))) {

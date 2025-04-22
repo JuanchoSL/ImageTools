@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace JuanchoSL\ImageTools\Engines;
+namespace JuanchoSL\ImageTools\Formats;
 
-class GdImage extends AbstractImage
+use JuanchoSL\ImageTools\Contracts\WriteableInterface;
+
+class GdImage extends AbstractImage implements WriteableInterface
 {
 
     public static function read(string $filepath)

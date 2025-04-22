@@ -1,13 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace JuanchoSL\ImageTools\Engines;
+namespace JuanchoSL\ImageTools\Formats;
 
-class WebpImage extends AbstractImage
+use JuanchoSL\ImageTools\Contracts\WriteableInterface;
+
+class BmpImage extends AbstractImage implements WriteableInterface
 {
 
     public static function read(string $filepath)
     {
-        return imagecreatefromwebp($filepath);
+        return imagecreatefrombmp($filepath);
     }
 
     public function save(string &$filepath): bool
@@ -15,14 +17,14 @@ class WebpImage extends AbstractImage
         if (pathinfo($filepath, PATHINFO_EXTENSION) !== $this->getExtension()) {
             $filepath .= '.' . $this->getExtension();
         }
-        return imagewebp($this->modified, $filepath, 100);
+        return imagebmp($this->modified, $filepath, true);
     }
     public function getExtension(): string
     {
-        return image_type_to_extension(IMAGETYPE_WEBP, false);
+        return image_type_to_extension(IMAGETYPE_BMP, false);
     }
     public function getMimetype(): string
     {
-        return image_type_to_mime_type(IMAGETYPE_WEBP);
+        return image_type_to_mime_type(IMAGETYPE_BMP);
     }
 }

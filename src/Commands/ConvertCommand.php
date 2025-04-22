@@ -4,7 +4,7 @@ namespace JuanchoSL\ImageTools\Commands;
 
 use JuanchoSL\HttpData\Factories\StreamFactory;
 use JuanchoSL\ImageTools\Dtos\Color;
-use JuanchoSL\ImageTools\Engines\StringImage;
+use JuanchoSL\ImageTools\Formats\StringImage;
 use JuanchoSL\ImageTools\ImageToolsFactory;
 use JuanchoSL\ImageTools\ValueObjects\ColorLevel;
 use JuanchoSL\ImageTools\ValueObjects\TransparencyLevel;

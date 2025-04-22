@@ -1,13 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace JuanchoSL\ImageTools\Engines;
+namespace JuanchoSL\ImageTools\Formats;
 
-class AvifImage extends AbstractImage
+use JuanchoSL\ImageTools\Contracts\WriteableInterface;
+
+class GifImage extends AbstractImage implements WriteableInterface
 {
 
     public static function read(string $filepath)
     {
-        return imagecreatefromavif($filepath);
+        return imagecreatefromgif($filepath);
     }
 
     public function save(string &$filepath): bool
@@ -15,14 +17,14 @@ class AvifImage extends AbstractImage
         if (pathinfo($filepath, PATHINFO_EXTENSION) !== $this->getExtension()) {
             $filepath .= '.' . $this->getExtension();
         }
-        return imageavif($this->modified, $filepath, 100);
+        return imagegif($this->modified, $filepath);
     }
     public function getExtension(): string
     {
-        return 'avif';
+        return image_type_to_extension(IMAGETYPE_GIF, false);
     }
     public function getMimetype(): string
     {
-        return 'image/avif';
+        return image_type_to_mime_type(IMAGETYPE_GIF);
     }
 }

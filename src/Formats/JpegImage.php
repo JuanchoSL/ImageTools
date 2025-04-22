@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace JuanchoSL\ImageTools\Engines;
+namespace JuanchoSL\ImageTools\Formats;
 
-class JpegImage extends AbstractImage
+use JuanchoSL\ImageTools\Contracts\WriteableInterface;
+
+class JpegImage extends AbstractImage implements WriteableInterface
 {
 
     public static function read(string $filepath)

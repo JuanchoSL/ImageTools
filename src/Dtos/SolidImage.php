@@ -15,13 +15,12 @@ class SolidImage
     protected int $colorTransparencia;
     protected Size $size;
 
-    public function __construct(Size $size)
+    public function setSize(Size $size): static
     {
         $this->size = $size;
-        //$this->setWidth($width);
-        //$this->setHeight($height);
-        //$this->setBgColor();
+        return $this;
     }
+
     public function setBgColor(Color $color): static
     {
         $this->bg_color = $color;

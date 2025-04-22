@@ -2,15 +2,15 @@
 
 namespace JuanchoSL\ImageTools;
 
-use JuanchoSL\ImageTools\Engines\AvifImage;
-use JuanchoSL\ImageTools\Engines\BmpImage;
-use JuanchoSL\ImageTools\Engines\GifImage;
-use JuanchoSL\ImageTools\Engines\JpegImage;
-use JuanchoSL\ImageTools\Engines\PngImage;
-use JuanchoSL\ImageTools\Engines\StringImage;
-use JuanchoSL\ImageTools\Engines\WbmpImage;
-use JuanchoSL\ImageTools\Engines\WebpImage;
-use JuanchoSL\ImageTools\Engines\XbmImage;
+use JuanchoSL\ImageTools\Formats\AvifImage;
+use JuanchoSL\ImageTools\Formats\BmpImage;
+use JuanchoSL\ImageTools\Formats\GifImage;
+use JuanchoSL\ImageTools\Formats\JpegImage;
+use JuanchoSL\ImageTools\Formats\PngImage;
+use JuanchoSL\ImageTools\Formats\StringImage;
+use JuanchoSL\ImageTools\Formats\WbmpImage;
+use JuanchoSL\ImageTools\Formats\WebpImage;
+use JuanchoSL\ImageTools\Formats\XbmImage;
 
 class ImageToolsFactory
 {

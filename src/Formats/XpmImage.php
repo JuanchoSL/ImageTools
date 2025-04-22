@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace JuanchoSL\ImageTools\Engines;
+namespace JuanchoSL\ImageTools\Formats;
 
 class XpmImage extends AbstractImage
 {

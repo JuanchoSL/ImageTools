@@ -1,24 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace JuanchoSL\ImageTools\Engines;
+namespace JuanchoSL\ImageTools\Formats;
 
 use GdImage;
 use JuanchoSL\ImageTools\Contracts\ApplicableInterface;
 use JuanchoSL\ImageTools\Contracts\EditableInterface;
 use JuanchoSL\ImageTools\Contracts\InvokableInterface;
 use JuanchoSL\ImageTools\Contracts\ReadableInterface;
-use JuanchoSL\ImageTools\Contracts\WriteableInterface;
 use JuanchoSL\ImageTools\Dtos\Color;
 use JuanchoSL\ImageTools\Dtos\Coordinates;
-use JuanchoSL\ImageTools\Elements\Cercle;
 use JuanchoSL\ImageTools\Elements\Line;
 use JuanchoSL\ImageTools\Dtos\Size;
-use JuanchoSL\ImageTools\Elements\Rectangle;
-use JuanchoSL\ImageTools\Elements\Square;
 use JuanchoSL\ImageTools\Traits\PositionerTrait;
 use JuanchoSL\ImageTools\ValueObjects\ColorLevel;
 
-abstract class AbstractImage implements EditableInterface, ReadableInterface, WriteableInterface, InvokableInterface
+abstract class AbstractImage implements EditableInterface, ReadableInterface, InvokableInterface
 {
 
     use PositionerTrait;
@@ -143,20 +139,6 @@ abstract class AbstractImage implements EditableInterface, ReadableInterface, Wr
         }
     }
 
-*/
-    public function addImage(AbstractImage $estampa, ?int $x = 0, ?int $y = 0)
-    {
-        imagecopy(
-            $this->modified,
-            $estampa(),
-            $this->calculateStartPosition($this->getWidth(), $estampa->getWidth(), $x),
-            $this->calculateStartPosition($this->getHeight(), $estampa->getHeight(), $y),
-            0,
-            0,
-            $estampa->getWidth(),
-            $estampa->getHeight(),
-        );
-    }
     public function addImageWithOpaticy(AbstractImage $estampa, int $opacity = 50, ?int $x = 0, ?int $y = 0)
     {
         $opacity = min($opacity, 100);
@@ -172,7 +154,21 @@ abstract class AbstractImage implements EditableInterface, ReadableInterface, Wr
             $opacity
         );
     }
+*/
 
+    public function addImage(AbstractImage $estampa, ?int $x = 0, ?int $y = 0)
+    {
+        imagecopy(
+            $this->modified,
+            $estampa(),
+            $this->calculateStartPosition($this->getWidth(), $estampa->getWidth(), $x),
+            $this->calculateStartPosition($this->getHeight(), $estampa->getHeight(), $y),
+            0,
+            0,
+            $estampa->getWidth(),
+            $estampa->getHeight(),
+        );
+    }
     public function crop(Size $size, ?int $x = null, ?int $y = null)
     {
         $this->modified = imagecrop($this->modified, [

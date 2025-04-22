@@ -1,13 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace JuanchoSL\ImageTools\Engines;
+namespace JuanchoSL\ImageTools\Formats;
 
-class PngImage extends AbstractImage
+use JuanchoSL\ImageTools\Contracts\WriteableInterface;
+
+class WbmpImage extends AbstractImage implements WriteableInterface
 {
 
     public static function read(string $filepath)
     {
-        return imagecreatefrompng($filepath);
+        return imagecreatefromwbmp($filepath);
     }
 
     public function save(string &$filepath): bool
@@ -15,14 +17,14 @@ class PngImage extends AbstractImage
         if (pathinfo($filepath, PATHINFO_EXTENSION) !== $this->getExtension()) {
             $filepath .= '.' . $this->getExtension();
         }
-        return imagepng($this->modified, $filepath, 9);
+        return imagewbmp($this->modified, $filepath);
     }
     public function getExtension(): string
     {
-        return image_type_to_extension(IMAGETYPE_PNG, false);
+        return image_type_to_extension(IMAGETYPE_WBMP, false);
     }
     public function getMimetype(): string
     {
-        return image_type_to_mime_type(IMAGETYPE_PNG);
+        return image_type_to_mime_type(IMAGETYPE_WBMP);
     }
 }

@@ -1,77 +1,153 @@
-# Validation
+# ImageTools
 
 ## Description
 
-Little methods collection in order to validate variables contents
+Little methods collection for create, modify convert and manipulate images, graphics, texts, watermarks and logos
 
 ## Install
+
 ```bash
-composer require juanchosl/validators
-composer update
+composer require juanchosl/imagetools
 ```
 
 ## How to use
 
-### Validation availability
-* Strings
-* General numbers
-* Specific integers
-* Specific floats
+### Create a Solid image
 
-### Single validation
-
-You can perform an only check over a single value
+IF we needs to create a new image, can be created without format, and use an invokable system for generate the GDImage object previously to be modified or saved
 
 ```php
-StringValidation::isEmail("juanchosl@hotmail.com"); //true
+//Create a white color
+$bg = (new Color)
+    ->setRed(new ColorLevel(255))
+    ->setGreen(new ColorLevel(255))
+    ->setBlue(new ColorLevel(255))
+    ;
+
+//Define an Image size
+$size = (new Size)->setWidth(150)->setHeight(90);
+
+//Create Image and apply the created values
+$image = new SolidImage;
+$image->setSize($size)->setColor($color);
 ```
 
-### Multiple validation over 1 value
+### Open an image for edit
 
-You can perform a few checks over a single value
+#### Readed or sended image
 
 ```php
-$validator = new StringValidations();
-$validator
-    ->is()
-    ->isNotEmpty()
-    ->isLengthGreatherThan(15)
-    ->isEmail();
-
-$validator->getResult('juanchosl@hotmail.com'); //true
-
-print_r($validator->getResults('juanchosl@hotmail.com'));
-Array
-(
-    [is] => 1
-    [isNotEmpty] => 1
-    [isLengthGreatherThan: 15] => 1
-    [isEmail] => 1
-)
+$new_image = StringImage::read((string) $file->getStream())
 ```
 
-### Multiple validations over multiple values
-
-You can perform a few checks over multiple values
+#### Existing image
 
 ```php
-$validator = new StringValidations();
-$validator
-    ->is()
-    ->isNotEmpty()
-    ->isLengthGreatherThan(15)
-    ->isEmail();
+$new_image = ImageToolFactory::open($file_path_of_the_image);
+```
 
-    foreach(['juanchosl@hotmail.com', 'email@corporation.com'] as $text){
-        $validator->getResult($text); //true
+#### Created image
 
-        print_r($validator->getResults($text));
-        Array
-        (
-            [is] => 1
-            [isNotEmpty] => 1
-            [isLengthGreatherThan: 15] => 1
-            [isEmail] => 1
-        )
-    }
+```php
+$new_image = new PngImage($image());
+```
+
+### Add elements to oppened image
+
+#### Create and add a text over an oppened image
+
+```php
+$color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(0))->setBlue(new ColorLevel(0));
+$label = (new Text)->setColor($color)->setText("This is a text")->setSize(5);
+$new_image->add($label);
+```
+
+#### Line
+
+```php
+$pcolor = (new Color)
+    ->setRed(new ColorLevel(0))
+    ->setGreen(new ColorLevel(0))
+    ->setBlue(new ColorLevel(0))
+    ->setAlpha(new TransparencyLevel(0))
+;
+$polygon = (new Line)->setColor($pcolor)
+    ->setStartCoordinates((new Coordinates)->setX(15)->setY(25))
+    ->setEndCoordinates((new Coordinates)->setX(105)->setY(65));
+$new_image->add($polygon);
+```
+
+#### Cercle
+
+```php
+$pcolor = (new Color)
+    ->setRed(new ColorLevel(0))
+    ->setGreen(new ColorLevel(0))
+    ->setBlue(new ColorLevel(0))
+    ->setAlpha(new TransparencyLevel(0))
+;
+$polygon = (new Cercle)->setColor($pcolor)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize(50);
+$new_image->add($polygon);
+```
+
+#### Ellipse
+
+```php
+$pcolor = (new Color)
+    ->setRed(new ColorLevel(0))
+    ->setGreen(new ColorLevel(0))
+    ->setBlue(new ColorLevel(0))
+    ->setAlpha(new TransparencyLevel(0))
+;
+$polygon = (new Ellipse)->setColor($pcolor)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize((new Size)->setWidth(100)->setHeight(50));
+$new_image->add($polygon);
+```
+
+#### Square
+
+```php
+$pcolor = (new Color)
+    ->setRed(new ColorLevel(0))
+    ->setGreen(new ColorLevel(0))
+    ->setBlue(new ColorLevel(0))
+    ->setAlpha(new TransparencyLevel(0))
+;
+$polygon = (new Square)->setColor($pcolor)->setStartCoordinates((new Coordinates)->setX(20)->setY(10))->setSize(50);
+//$polygon = (new Arc)->setColor($pcolor)->setDegrees(240)->setSize((new Size)->setWidth(80)->setHeight(40))->setStartCoordinates((new Coordinates)->setX(80)->setY(40));
+$new_image->add($polygon);
+```
+
+#### Rectangle
+
+```php
+$pcolor = (new Color)
+    ->setRed(new ColorLevel(0))
+    ->setGreen(new ColorLevel(0))
+    ->setBlue(new ColorLevel(0))
+    ->setAlpha(new TransparencyLevel(0))
+;
+$size = (new Size)->setWidth(100)->setHeight(50);
+$start = (new Coordinates)->setX(20)->setY(10);
+$polygon = (new Rectangle)->setColor($pcolor)->setStartCoordinates($start)->setSize($size);
+//$polygon = (new Arc)->setColor($pcolor)->setDegrees(240)->setSize((new Size)->setWidth(80)->setHeight(40))->setStartCoordinates((new Coordinates)->setX(80)->setY(40));
+$new_image->add($polygon);
+```
+
+#### Polygon
+
+```php
+$pcolor = (new Color)
+    ->setRed(new ColorLevel(0))
+    ->setGreen(new ColorLevel(0))
+    ->setBlue(new ColorLevel(0))
+    ->setAlpha(new TransparencyLevel(0))
+;
+$polygon = (new Polygon)->setColor($pcolor)->setCoordinates(
+    (new Coordinates)->setX(75)->setY(10),
+    (new Coordinates)->setX(91)->setY(23),
+    (new Coordinates)->setX(84)->setY(40),
+    (new Coordinates)->setX(66)->setY(40),
+    (new Coordinates)->setX(59)->setY(23),
+);
+$new_image->add($polygon);
 ```

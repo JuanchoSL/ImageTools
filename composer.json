@@ -1,13 +1,26 @@
 {
     "name": "juanchosl/imagetools",
-    "description": "Little methods collection in order to create and modify imges",
+    "description": "Little methods collection for create, modify convert and manipulate images, graphics, texts, watermarks and logos",
     "type": "library",
     "license": "MIT",
     "homepage": "https://github.com/JuanchoSL/ImageTools",
     "minimum-stability": "dev",
     "keywords": [
         "image",
-        "images"
+        "images",
+        "png",
+        "jpg",
+        "jpeg",
+        "gif",
+        "avif",
+        "webp",
+        "gd",
+        "gd2",
+        "xbm",
+        "wbmp",
+        "resize",
+        "crop",
+        "watermark"
     ],
     "authors": [
         {
