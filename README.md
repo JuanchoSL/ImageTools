@@ -77,6 +77,8 @@ $polygon = (new Line)->setColor($pcolor)
 $new_image->add($polygon);
 ```
 
+![Line](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/line.png?raw=true "Line")
+
 #### Cercle
 
 ```php
@@ -89,6 +91,8 @@ $pcolor = (new Color)
 $polygon = (new Cercle)->setColor($pcolor)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize(50);
 $new_image->add($polygon);
 ```
+
+![Cercle](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/cercle.png?raw=true "Cercle")
 
 #### Ellipse
 
@@ -103,6 +107,8 @@ $polygon = (new Ellipse)->setColor($pcolor)->setStartCoordinates((new Coordinate
 $new_image->add($polygon);
 ```
 
+![Ellipse](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/ellipse.png?raw=true "Ellipse")
+
 #### Square
 
 ```php
@@ -113,9 +119,10 @@ $pcolor = (new Color)
     ->setAlpha(new TransparencyLevel(0))
 ;
 $polygon = (new Square)->setColor($pcolor)->setStartCoordinates((new Coordinates)->setX(20)->setY(10))->setSize(50);
-//$polygon = (new Arc)->setColor($pcolor)->setDegrees(240)->setSize((new Size)->setWidth(80)->setHeight(40))->setStartCoordinates((new Coordinates)->setX(80)->setY(40));
 $new_image->add($polygon);
 ```
+
+![Square](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/square.png?raw=true "Square")
 
 #### Rectangle
 
@@ -129,9 +136,10 @@ $pcolor = (new Color)
 $size = (new Size)->setWidth(100)->setHeight(50);
 $start = (new Coordinates)->setX(20)->setY(10);
 $polygon = (new Rectangle)->setColor($pcolor)->setStartCoordinates($start)->setSize($size);
-//$polygon = (new Arc)->setColor($pcolor)->setDegrees(240)->setSize((new Size)->setWidth(80)->setHeight(40))->setStartCoordinates((new Coordinates)->setX(80)->setY(40));
 $new_image->add($polygon);
 ```
+
+![Rectangle](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/rectangle.png?raw=true "Rectangle")
 
 #### Polygon
 
@@ -151,3 +159,5 @@ $polygon = (new Polygon)->setColor($pcolor)->setCoordinates(
 );
 $new_image->add($polygon);
 ```
+
+![Polygon](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/polygon.png?raw=true "Polygon")
