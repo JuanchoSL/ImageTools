@@ -103,27 +103,32 @@ $new_image->add($polygon);
 #### Pie
 
 ```php
-$color = (new Color)->setRed(new ColorLevel(125))->setGreen(new ColorLevel(30))->setBlue(new ColorLevel(10));
+
 $center = (new Coordinates)->setX(75)->setY(45);
+$size = (new Size)->setWidth(50)->setHeight(50);
+
 $color = (new Color)->setRed(new ColorLevel(255))->setGreen(new ColorLevel(0))->setBlue(new ColorLevel(0));
-$polygon = (new Pie)->setColor($color)->setSize((new Size)->setWidth(50)->setHeight(50))->setCenter($center);
-$polygon->setDegrees((new Degrees)->setStart(0)->setEnd(45));
-$captcha->add($polygon);
-
-$color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(255))->setBlue(new ColorLevel(0));
-$polygon = (new Pie)->setColor($color)->setSize((new Size)->setWidth(50)->setHeight(50))->setCenter($center);
-$polygon->setDegrees((new Degrees)->setStart(45)->setEnd(95));
-$captcha->add($polygon);
-
-$color = (new Color)
-    ->setRed(new ColorLevel(0))
-    ->setGreen(new ColorLevel(0))
-    ->setBlue(new ColorLevel(255));
 $polygon = (new Pie)
     ->setColor($color)
-    ->setSize((new Size)->setWidth(50)->setHeight(50))
-    ->setCenter($center);
-$polygon->setDegrees((new Degrees)->setStart(95)->setEnd(195));
+    ->setSize($size)
+    ->setCenter($center)
+    ->setDegrees((new Degrees)->setStart(0)->setEnd(45));
+$new_image->add($polygon);
+
+$color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(255))->setBlue(new ColorLevel(0));
+$polygon = (new Pie)
+    ->setColor($color)
+    ->setSize($size)
+    ->setCenter($center)
+    ->setDegrees((new Degrees)->setStart(45)->setEnd(95));
+$new_image->add($polygon);
+
+$color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(0))->setBlue(new ColorLevel(255));
+$polygon = (new Pie)
+    ->setColor($color)
+    ->setSize($size)
+    ->setCenter($center)
+    ->setDegrees((new Degrees)->setStart(95)->setEnd(195));
 $new_image->add($polygon);
 ```
 

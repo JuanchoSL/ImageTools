@@ -76,25 +76,30 @@ class FigureCommand extends UseCases
                 break;
             case 'pie':
                 $center = (new Coordinates)->setX(75)->setY(45);
+                $size = (new Size)->setWidth(50)->setHeight(50);
+                
                 $color = (new Color)->setRed(new ColorLevel(255))->setGreen(new ColorLevel(0))->setBlue(new ColorLevel(0));
-                $polygon = (new Pie)->setColor($color)->setSize((new Size)->setWidth(50)->setHeight(50))->setCenter($center);
-                $polygon->setDegrees((new Degrees)->setStart(0)->setEnd(45));
-                $captcha->add($polygon);
-
-                $color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(255))->setBlue(new ColorLevel(0));
-                $polygon = (new Pie)->setColor($color)->setSize((new Size)->setWidth(50)->setHeight(50))->setCenter($center);
-                $polygon->setDegrees((new Degrees)->setStart(45)->setEnd(95));
-                $captcha->add($polygon);
-
-                $color = (new Color)
-                    ->setRed(new ColorLevel(0))
-                    ->setGreen(new ColorLevel(0))
-                    ->setBlue(new ColorLevel(255));
                 $polygon = (new Pie)
                     ->setColor($color)
-                    ->setSize((new Size)->setWidth(50)->setHeight(50))
-                    ->setCenter($center);
-                $polygon->setDegrees((new Degrees)->setStart(95)->setEnd(195));
+                    ->setSize($size)
+                    ->setCenter($center)
+                    ->setDegrees((new Degrees)->setStart(0)->setEnd(45));
+                $captcha->add($polygon);
+                
+                $color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(255))->setBlue(new ColorLevel(0));
+                $polygon = (new Pie)
+                    ->setColor($color)
+                    ->setSize($size)
+                    ->setCenter($center)
+                    ->setDegrees((new Degrees)->setStart(45)->setEnd(95));
+                $captcha->add($polygon);
+                
+                $color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(0))->setBlue(new ColorLevel(255));
+                $polygon = (new Pie)
+                    ->setColor($color)
+                    ->setSize($size)
+                    ->setCenter($center)
+                    ->setDegrees((new Degrees)->setStart(95)->setEnd(195));
                 //$captcha->add($polygon);
                 break;
             case 'cercle':
