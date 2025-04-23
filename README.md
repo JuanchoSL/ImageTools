@@ -68,7 +68,7 @@ $new_image->add($label);
 
 ```php
 $color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(0))->setBlue(new ColorLevel(0));
-$label = (new Text)->setColor($color)->setText("This is a text")->setSize(18)->setFont($path_to_the_font);
+$label = (new Text)->setColor($color)->setText("Here a text")->setSize(18)->setFont($path_to_the_font);
 $new_image->add($label);
 ```
 
