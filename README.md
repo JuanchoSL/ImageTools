@@ -78,9 +78,11 @@ $new_image->add($label);
 
 ```php
 $color = (new Color)->setRed(new ColorLevel(125))->setGreen(new ColorLevel(30))->setBlue(new ColorLevel(10));
-$polygon = (new Line)->setColor($color)
+$polygon = (new Line)
+    ->setColor($color)
     ->setStartCoordinates((new Coordinates)->setX(15)->setY(25))
-    ->setEndCoordinates((new Coordinates)->setX(105)->setY(65));
+    ->setEndCoordinates((new Coordinates)->setX(105)->setY(65))
+;
 $new_image->add($polygon);
 ```
 
@@ -89,7 +91,11 @@ $new_image->add($polygon);
 #### Arc
 
 ```php
-$color = (new Color)->setRed(new ColorLevel(125))->setGreen(new ColorLevel(30))->setBlue(new ColorLevel(10));
+$color = (new Color)
+    ->setRed(new ColorLevel(125))
+    ->setGreen(new ColorLevel(30))
+    ->setBlue(new ColorLevel(10))
+;
 $polygon = (new Arc)
     ->setColor($color)
     ->setDegrees((new Degrees)->setStart(0)->setEnd(240))
@@ -137,8 +143,16 @@ $new_image->add($polygon);
 #### Cercle
 
 ```php
-$color = (new Color)->setRed(new ColorLevel(125))->setGreen(new ColorLevel(30))->setBlue(new ColorLevel(10));
-$polygon = (new Cercle)->setColor($color)->setCenter((new Coordinates)->setX(75)->setY(45))->setSize(50);
+$color = (new Color)
+    ->setRed(new ColorLevel(125))
+    ->setGreen(new ColorLevel(30))
+    ->setBlue(new ColorLevel(10))
+;
+$polygon = (new Cercle)
+    ->setColor($color)
+    ->setCenter((new Coordinates)->setX(75)->setY(45))
+    ->setSize(50)
+;
 $new_image->add($polygon);
 ```
 
@@ -147,8 +161,16 @@ $new_image->add($polygon);
 #### Ellipse
 
 ```php
-$color = (new Color)->setRed(new ColorLevel(125))->setGreen(new ColorLevel(30))->setBlue(new ColorLevel(10));
-$polygon = (new Ellipse)->setColor($color)->setCenter((new Coordinates)->setX(75)->setY(45))->setSize((new Size)->setWidth(100)->setHeight(50));
+$color = (new Color)
+    ->setRed(new ColorLevel(125))
+    ->setGreen(new ColorLevel(30))
+    ->setBlue(new ColorLevel(10))
+;
+$polygon = (new Ellipse)
+    ->setColor($color)
+    ->setCenter((new Coordinates)->setX(75)->setY(45))
+    ->setSize((new Size)->setWidth(100)->setHeight(50))
+;
 $new_image->add($polygon);
 ```
 
@@ -157,8 +179,16 @@ $new_image->add($polygon);
 #### Square
 
 ```php
-$color = (new Color)->setRed(new ColorLevel(125))->setGreen(new ColorLevel(30))->setBlue(new ColorLevel(10));
-$polygon = (new Square)->setColor($color)->setStartCoordinates((new Coordinates)->setX(20)->setY(10))->setSize(50);
+$color = (new Color)
+    ->setRed(new ColorLevel(125))
+    ->setGreen(new ColorLevel(30))
+    ->setBlue(new ColorLevel(10))
+;
+$polygon = (new Square)
+    ->setColor($color)
+    ->setStartCoordinates((new Coordinates)->setX(20)->setY(10))
+    ->setSize(50)
+;
 $new_image->add($polygon);
 ```
 
@@ -167,10 +197,18 @@ $new_image->add($polygon);
 #### Rectangle
 
 ```php
-$color = (new Color)->setRed(new ColorLevel(125))->setGreen(new ColorLevel(30))->setBlue(new ColorLevel(10));
+$color = (new Color)
+    ->setRed(new ColorLevel(125))
+    ->setGreen(new ColorLevel(30))
+    ->setBlue(new ColorLevel(10))
+;
 $size = (new Size)->setWidth(100)->setHeight(50);
 $start = (new Coordinates)->setX(20)->setY(10);
-$polygon = (new Rectangle)->setColor($color)->setStartCoordinates($start)->setSize($size);
+$polygon = (new Rectangle)
+    ->setColor($color)
+    ->setStartCoordinates($start)
+    ->setSize($size)
+;
 $new_image->add($polygon);
 ```
 
@@ -179,14 +217,21 @@ $new_image->add($polygon);
 #### Polygon
 
 ```php
-$color = (new Color)->setRed(new ColorLevel(125))->setGreen(new ColorLevel(30))->setBlue(new ColorLevel(10));
-$polygon = (new Polygon)->setColor($color)->setCoordinates(
-    (new Coordinates)->setX(75)->setY(10),
-    (new Coordinates)->setX(91)->setY(23),
-    (new Coordinates)->setX(84)->setY(40),
-    (new Coordinates)->setX(66)->setY(40),
-    (new Coordinates)->setX(59)->setY(23),
-);
+$color = (new Color)
+    ->setRed(new ColorLevel(125))
+    ->setGreen(new ColorLevel(30))
+    ->setBlue(new ColorLevel(10))
+;
+$polygon = (new Polygon)
+    ->setColor($color)
+    ->setCoordinates(
+        (new Coordinates)->setX(75)->setY(10),
+        (new Coordinates)->setX(91)->setY(23),
+        (new Coordinates)->setX(84)->setY(40),
+        (new Coordinates)->setX(66)->setY(40),
+        (new Coordinates)->setX(59)->setY(23),
+    )
+;
 $new_image->add($polygon);
 ```
 

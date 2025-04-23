@@ -4,30 +4,21 @@ namespace JuanchoSL\ImageTools\Elements;
 
 use GdImage;
 use JuanchoSL\ImageTools\Contracts\ApplicableInterface;
-use JuanchoSL\ImageTools\Contracts\EditableInterface;
+use JuanchoSL\ImageTools\Contracts\ColoreableInterface;
 use JuanchoSL\ImageTools\Contracts\InvokableInterface;
-use JuanchoSL\ImageTools\Contracts\ReadableInterface;
-use JuanchoSL\ImageTools\Dtos\Color;
 use JuanchoSL\ImageTools\Dtos\Coordinates;
+use JuanchoSL\ImageTools\Traits\ColoreableTrait;
 use JuanchoSL\ImageTools\Traits\PositionerTrait;
 
-class Text implements ApplicableInterface
+class Text implements ApplicableInterface, ColoreableInterface
 {
-
-    use PositionerTrait;
+    use ColoreableTrait, PositionerTrait;
 
     protected ?string $font = null;
     protected string $text = '';
     protected int $size = 5;
-    protected Color $text_color;
     protected ?Coordinates $start = null;
 
-
-    public function setColor(Color $color): static
-    {
-        $this->text_color = $color;
-        return $this;
-    }
     public function setText(string $text): static
     {
         $this->text = $text;
@@ -60,17 +51,14 @@ class Text implements ApplicableInterface
     {
         return $this->font;
     }
-    public function getColor(): Color
-    {
-        return $this->text_color;
-    }
 
     public function apply(InvokableInterface $image): GdImage
     {
         $imager = $image();
 
         $color = $this->getColor();
-        $new_color = $color($image);
+        //$new_color = $color($image);
+        $new_color = $this->applyColor($image());
         $font_size = $this->getSize();
         if (is_null($this->getFont())) {
 

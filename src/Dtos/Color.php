@@ -2,34 +2,35 @@
 
 namespace JuanchoSL\ImageTools\Dtos;
 
+use JuanchoSL\ImageTools\Contracts\ColorInterface;
 use JuanchoSL\ImageTools\Contracts\ReadableInterface;
 use JuanchoSL\ImageTools\Contracts\WriteableInterface;
 use JuanchoSL\ImageTools\ValueObjects\ColorLevel;
 use JuanchoSL\ImageTools\ValueObjects\TransparencyLevel;
 
-class Color
+class Color implements ColorInterface
 {
     protected ColorLevel $red;
     protected ColorLevel $green;
     protected ColorLevel $blue;
     protected ?TransparencyLevel $alpha=null;
 
-    public function setRed(ColorLevel $level)
+    public function setRed(ColorLevel $level): static
     {
         $this->red = $level;
         return $this;
     }
-    public function setGreen(ColorLevel $level)
+    public function setGreen(ColorLevel $level): static
     {
         $this->green = $level;
         return $this;
     }
-    public function setBlue(ColorLevel $level)
+    public function setBlue(ColorLevel $level): static
     {
         $this->blue = $level;
         return $this;
     }
-    public function setAlpha(TransparencyLevel $alpha)
+    public function setAlpha(TransparencyLevel $alpha): static
     {
         $this->alpha = $alpha;
         return $this;
@@ -50,7 +51,7 @@ class Color
     {
         return $this->alpha;// ?? new TransparencyLevel(0);
     }
-
+/*
     public function __invoke(WriteableInterface&ReadableInterface $image){
         $imager = $image();
         if(is_null($this->alpha)){
@@ -68,5 +69,5 @@ class Color
             intval((string) $this->getBlue()),
             intval((string) $this->getAlpha())
         );
-    }
+    }*/
 }

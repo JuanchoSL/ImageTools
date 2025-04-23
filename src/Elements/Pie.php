@@ -4,33 +4,22 @@ namespace JuanchoSL\ImageTools\Elements;
 
 use GdImage;
 use JuanchoSL\ImageTools\Contracts\ApplicableInterface;
+use JuanchoSL\ImageTools\Contracts\ColoreableInterface;
 use JuanchoSL\ImageTools\Contracts\InvokableInterface;
-use JuanchoSL\ImageTools\Dtos\Color;
 use JuanchoSL\ImageTools\Dtos\Coordinates;
 use JuanchoSL\ImageTools\Dtos\Degrees;
 use JuanchoSL\ImageTools\Dtos\Size;
+use JuanchoSL\ImageTools\Traits\ColoreableTrait;
 use JuanchoSL\ImageTools\Traits\PositionerTrait;
 
-class Pie implements ApplicableInterface
+class Pie implements ApplicableInterface, ColoreableInterface
 {
 
-    use PositionerTrait;
+    use PositionerTrait, ColoreableTrait;
 
-    protected Color $text_color;
     protected Coordinates $start;
     protected Size $size;
     protected Degrees $degrees;
-
-    public function setColor(Color $color): static
-    {
-        $this->text_color = $color;
-        return $this;
-    }
-
-    public function getColor(): Color
-    {
-        return $this->text_color;
-    }
 
     public function setCenter(Coordinates $start): static
     {
@@ -55,8 +44,8 @@ class Pie implements ApplicableInterface
     public function apply(InvokableInterface $image): GdImage
     {
         $imager = $image();
-        $color = $this->getColor();
         /*  
+        $color = $this->getColor();
                 if (is_null($this->getColor()->getAlpha())) {
                     $type = IMG_ARC_NOFILL; //without body
                     //$type=IMG_ARC_PIE;
@@ -71,8 +60,9 @@ class Pie implements ApplicableInterface
                     
                 }
                 $type = IMG_ARC_ROUNDED;
+                $color = $color($image);
         */
-        $color = $color($image);
+        $color = $this->applyColor($image());
         imagefilledarc(
             $imager,
             $this->start->getX(),

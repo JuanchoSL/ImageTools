@@ -4,7 +4,7 @@ namespace JuanchoSL\ImageTools\Contracts;
 
 interface ColoreableInterface
 {
-    public function setColor(Color $color): static;
-    public function getColor(): Color;
+    public function setColor(ColorInterface $color): static;
+    public function getColor(): ColorInterface;
 
 }

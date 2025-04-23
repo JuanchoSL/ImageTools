@@ -4,38 +4,26 @@ namespace JuanchoSL\ImageTools\Elements;
 
 use GdImage;
 use JuanchoSL\ImageTools\Contracts\ApplicableInterface;
-use JuanchoSL\ImageTools\Contracts\EditableInterface;
+use JuanchoSL\ImageTools\Contracts\ColoreableInterface;
 use JuanchoSL\ImageTools\Contracts\InvokableInterface;
-use JuanchoSL\ImageTools\Contracts\ReadableInterface;
-use JuanchoSL\ImageTools\Dtos\Color;
 use JuanchoSL\ImageTools\Dtos\Coordinates;
 use JuanchoSL\ImageTools\Dtos\Size;
+use JuanchoSL\ImageTools\Traits\ColoreableTrait;
 use JuanchoSL\ImageTools\Traits\PositionerTrait;
 
-class Ellipse implements ApplicableInterface
+class Ellipse implements ApplicableInterface, ColoreableInterface
 {
 
-    use PositionerTrait;
+    use PositionerTrait, ColoreableTrait;
 
-    protected Color $text_color;
     protected Coordinates $start;
     protected Size $size;
 
-    public function setColor(Color $color): static
-    {
-        $this->text_color = $color;
-        return $this;
-    }
 
-    public function setBgColor(Color $color): static
+    public function setBgColor(ColoreableInterface $color): static
     {
         $this->bg_color = $color;
         return $this;
-    }
-
-    public function getColor(): Color
-    {
-        return $this->text_color;
     }
 
     public function setCenter(Coordinates $start): static
@@ -52,9 +40,10 @@ class Ellipse implements ApplicableInterface
     public function apply(InvokableInterface $image): GdImage
     {
         $imager = $image();
-        $color = $this->getColor();
-        $color = $color($image);
+        //$color = $this->getColor();
+        //$color = $color($image);
         //        imageellipse($imager, $this->start->getX(), $this->start->getY(), $this->size->getWidth(), $this->size->getHeight(), $color);
+        $color = $this->applyColor($image());
         imagefilledellipse($imager, $this->start->getX(), $this->start->getY(), $this->size->getWidth(), $this->size->getHeight(), $color);
         return $imager;
     }
