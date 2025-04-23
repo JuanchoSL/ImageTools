@@ -109,13 +109,17 @@ $new_image->add($polygon);
 #### Pie
 
 ```php
-$pcolor = (new Color)
+$color = (new Color)
     ->setRed(new ColorLevel(0))
     ->setGreen(new ColorLevel(0))
     ->setBlue(new ColorLevel(0))
     ->setAlpha(new TransparencyLevel(0))
 ;
-$polygon = (new Pie)->setColor($pcolor)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize(50);
+$polygon = (new Pie)
+    ->setColor($color)
+    ->setDegrees(240)
+    ->setSize((new Size)->setWidth(50)->setHeight(50))
+    ->setStartCoordinates((new Coordinates)->setX(75)->setY(45));
 $new_image->add($polygon);
 ```
 
