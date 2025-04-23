@@ -12,7 +12,7 @@ class Color
     protected ColorLevel $red;
     protected ColorLevel $green;
     protected ColorLevel $blue;
-    protected TransparencyLevel $alpha;
+    protected ?TransparencyLevel $alpha=null;
 
     public function setRed(ColorLevel $level)
     {
@@ -46,14 +46,22 @@ class Color
     {
         return $this->blue ?? new ColorLevel();
     }
-    public function getAlpha(): TransparencyLevel
+    public function getAlpha(): ?TransparencyLevel
     {
-        return $this->alpha ?? new TransparencyLevel(0);
+        return $this->alpha;// ?? new TransparencyLevel(0);
     }
 
     public function __invoke(WriteableInterface&ReadableInterface $image){
         $imager = $image();
-        return $new_color = imagecolorallocatealpha(
+        if(is_null($this->alpha)){
+            return imagecolorallocate(
+                $imager,
+                intval((string) $this->getRed()),
+                intval((string) $this->getGreen()),
+                intval((string) $this->getBlue())
+            );
+        }
+        return imagecolorallocatealpha(
             $imager,
             intval((string) $this->getRed()),
             intval((string) $this->getGreen()),

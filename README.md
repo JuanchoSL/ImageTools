@@ -64,6 +64,16 @@ $new_image->add($label);
 
 ![Text](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/text.png?raw=true "Text")
 
+#### Text with true type fons
+
+```php
+$color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(0))->setBlue(new ColorLevel(0));
+$label = (new Text)->setColor($color)->setText("This is a text")->setSize(18)->setFont($path_to_the_font);
+$new_image->add($label);
+```
+
+![TTF text](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/ttf.png?raw=true "TTF text")
+
 #### Line
 
 ```php
@@ -80,6 +90,36 @@ $new_image->add($polygon);
 ```
 
 ![Line](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/line.png?raw=true "Line")
+
+#### Arc
+
+```php
+$pcolor = (new Color)
+    ->setRed(new ColorLevel(0))
+    ->setGreen(new ColorLevel(0))
+    ->setBlue(new ColorLevel(0))
+    ->setAlpha(new TransparencyLevel(0))
+;
+$polygon = (new Arc)->setColor($pcolor)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize(50);
+$new_image->add($polygon);
+```
+
+![Arc](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/arc.png?raw=true "Arc")
+
+#### Pie
+
+```php
+$pcolor = (new Color)
+    ->setRed(new ColorLevel(0))
+    ->setGreen(new ColorLevel(0))
+    ->setBlue(new ColorLevel(0))
+    ->setAlpha(new TransparencyLevel(0))
+;
+$polygon = (new Pie)->setColor($pcolor)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize(50);
+$new_image->add($polygon);
+```
+
+![Pie](https://github.com/JuanchoSL/ImageTools/blob/master/assets/images/pie.png?raw=true "Pie")
 
 #### Cercle
 

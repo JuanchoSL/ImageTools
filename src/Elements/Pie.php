@@ -14,7 +14,7 @@ use JuanchoSL\ImageTools\Dtos\Size;
 use JuanchoSL\ImageTools\Traits\PositionerTrait;
 use JuanchoSL\ImageTools\ValueObjects\TransparencyLevel;
 
-class Arc implements ApplicableInterface
+class Pie implements ApplicableInterface
 {
 
     use PositionerTrait;
@@ -59,8 +59,25 @@ class Arc implements ApplicableInterface
     {
         $imager = $image();
         $color = $this->getColor();
+/*  
+        if (is_null($this->getColor()->getAlpha())) {
+            $type = IMG_ARC_NOFILL; //without body
+            //$type=IMG_ARC_PIE;
+        } elseif (intval((string) $this->getColor()->getAlpha()) == 0) {
+            $type = IMG_ARC_EDGED;
+        } elseif (intval((string) $this->getColor()->getAlpha()) == 127) {
+            //$type = IMG_ARC_EDGED;
+            $color->setAlpha(new TransparencyLevel(0));
+            $type = IMG_ARC_CHORD;
+        } else {
+            $type = IMG_ARC_PIE;
+            
+        }
+        $type = IMG_ARC_ROUNDED;
+*/
         $color = $color($image);
-        imagearc($imager, $this->start->getX(), $this->start->getY(), $this->size->getWidth(), $this->size->getHeight(), 0, $this->degrees, $color);
+        imagefilledarc($imager, $this->start->getX(), $this->start->getY(), $this->size->getWidth(), $this->size->getHeight(), 0, $this->degrees, $color, IMG_ARC_PIE);
+        //imagearc($imager, $this->start->getX(), $this->start->getY(), $this->size->getWidth(), $this->size->getHeight(),0,$this->degrees, $color);
         return $imager;
     }
 }

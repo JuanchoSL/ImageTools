@@ -6,26 +6,19 @@ use JuanchoSL\HttpData\Factories\StreamFactory;
 use JuanchoSL\ImageTools\Elements\Arc;
 use JuanchoSL\ImageTools\Dtos\Color;
 use JuanchoSL\ImageTools\Dtos\Coordinates;
-use JuanchoSL\ImageTools\Dtos\EmptyImage;
 use JuanchoSL\ImageTools\Dtos\Size;
 use JuanchoSL\ImageTools\Dtos\SolidImage;
 use JuanchoSL\ImageTools\Elements\Cercle;
 use JuanchoSL\ImageTools\Elements\Ellipse;
 use JuanchoSL\ImageTools\Elements\Line;
+use JuanchoSL\ImageTools\Elements\Pie;
 use JuanchoSL\ImageTools\Elements\Polygon;
 use JuanchoSL\ImageTools\Elements\Rectangle;
 use JuanchoSL\ImageTools\Elements\Square;
 use JuanchoSL\ImageTools\Elements\Text;
-use JuanchoSL\ImageTools\Dtos\TextLabel;
-use JuanchoSL\ImageTools\Formats\AbstractImage;
 use JuanchoSL\ImageTools\Formats\PngImage;
-use JuanchoSL\ImageTools\Formats\StringImage;
-use JuanchoSL\ImageTools\Formats\WebpImage;
-use JuanchoSL\ImageTools\ImageToolsFactory;
-use JuanchoSL\ImageTools\ValueObjects\ColorLevel;
 use JuanchoSL\ImageTools\ValueObjects\TransparencyLevel;
-use JuanchoSL\RequestListener\Enums\InputArgument;
-use JuanchoSL\RequestListener\Enums\InputOption;
+use JuanchoSL\ImageTools\ValueObjects\ColorLevel;
 use JuanchoSL\RequestListener\UseCases;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -56,7 +49,7 @@ class FigureCommand extends UseCases
             ->setRed(new ColorLevel(0))
             ->setGreen(new ColorLevel(0))
             ->setBlue(new ColorLevel(0))
-            ->setAlpha(new TransparencyLevel(0))
+            ->setAlpha(new TransparencyLevel(value: 110))
         ;
 
         switch (strtolower($request->getAttribute('figure'))) {
@@ -64,10 +57,28 @@ class FigureCommand extends UseCases
             case 'text':
                 $polygon = (new Text)->setColor($color)->setText("This is a text")->setSize(5);
                 break;
+            case 'ttf':
+                $font = implode(DIRECTORY_SEPARATOR, [dirname(__FILE__, 3), 'assets', 'fonts', 'ididthis.ttf']);
+                $polygon = (new Text)->setColor($color)->setText("Here a text")->setSize(18)->setFont($font);
+                break;
             case 'line':
                 $polygon = (new Line)->setColor($color)
                     ->setStartCoordinates((new Coordinates)->setX(15)->setY(25))
                     ->setEndCoordinates((new Coordinates)->setX(105)->setY(65));
+                break;
+            case 'arc':
+                $polygon = (new Arc)
+                    ->setColor($color)
+                    ->setDegrees(240)
+                    ->setSize((new Size)->setWidth(80)->setHeight(40))
+                    ->setStartCoordinates((new Coordinates)->setX(80)->setY(40));
+                break;
+            case 'pie':
+                $polygon = (new Pie)
+                    ->setColor($color)
+                    ->setDegrees(240)
+                    ->setSize((new Size)->setWidth(80)->setHeight(40))
+                    ->setStartCoordinates((new Coordinates)->setX(80)->setY(40));
                 break;
             case 'cercle':
                 $polygon = (new Cercle)->setColor($color)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize(50);
@@ -93,7 +104,7 @@ class FigureCommand extends UseCases
         }
 
         $captcha->add($polygon);
-        $path = implode(DIRECTORY_SEPARATOR, [dirname(__FILE__, 3), 'assets', 'images', strtolower($request->getAttribute('figure'))]);
+        $path = implode(DIRECTORY_SEPARATOR, [dirname(__FILE__, 3), 'assets', 'images', strtolower($request->getAttribute('figure'))]) . "." . $captcha->getExtension();
         if (!file_exists($path)) {
             $captcha->save($path);
         }

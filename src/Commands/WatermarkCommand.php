@@ -4,9 +4,7 @@ namespace JuanchoSL\ImageTools\Commands;
 
 use JuanchoSL\HttpData\Factories\StreamFactory;
 use JuanchoSL\ImageTools\Dtos\Color;
-use JuanchoSL\ImageTools\Dtos\TextLabel;
 use JuanchoSL\ImageTools\Elements\Text;
-use JuanchoSL\ImageTools\Formats\PngImage;
 use JuanchoSL\ImageTools\Formats\StringImage;
 use JuanchoSL\ImageTools\ImageToolsFactory;
 use JuanchoSL\ImageTools\ValueObjects\ColorLevel;
