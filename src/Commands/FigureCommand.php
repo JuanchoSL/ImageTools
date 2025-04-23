@@ -3,6 +3,7 @@
 namespace JuanchoSL\ImageTools\Commands;
 
 use JuanchoSL\HttpData\Factories\StreamFactory;
+use JuanchoSL\ImageTools\Dtos\Degrees;
 use JuanchoSL\ImageTools\Elements\Arc;
 use JuanchoSL\ImageTools\Dtos\Color;
 use JuanchoSL\ImageTools\Dtos\Coordinates;
@@ -36,9 +37,9 @@ class FigureCommand extends UseCases
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $bg = (new Color)
-            ->setRed(new ColorLevel(255))
-            ->setGreen(new ColorLevel(255))
-            ->setBlue(new ColorLevel(255));
+            ->setRed(new ColorLevel(0))
+            ->setGreen(new ColorLevel(0))
+            ->setBlue(new ColorLevel(0));
 
         $size = (new Size)->setWidth(150)->setHeight(90);
         $image = new SolidImage;
@@ -49,7 +50,7 @@ class FigureCommand extends UseCases
             ->setRed(new ColorLevel(125))
             ->setGreen(new ColorLevel(30))
             ->setBlue(new ColorLevel(10))
-            ->setAlpha(new TransparencyLevel(value: 0))
+            ->setAlpha(new TransparencyLevel(0))
         ;
 
         switch (strtolower($request->getAttribute('figure'))) {
@@ -69,28 +70,56 @@ class FigureCommand extends UseCases
             case 'arc':
                 $polygon = (new Arc)
                     ->setColor($color)
-                    ->setDegrees(240)
+                    ->setDegrees((new Degrees)->setStart(0)->setEnd(240))
                     ->setSize((new Size)->setWidth(80)->setHeight(40))
-                    ->setStartCoordinates((new Coordinates)->setX(80)->setY(40));
+                    ->setCenter((new Coordinates)->setX(80)->setY(40));
                 break;
             case 'pie':
+                $center = (new Coordinates)->setX(75)->setY(45);
+                $color = (new Color)->setRed(new ColorLevel(255))->setGreen(new ColorLevel(0))->setBlue(new ColorLevel(0));
+                $polygon = (new Pie)->setColor($color)->setSize((new Size)->setWidth(50)->setHeight(50))->setCenter($center);
+                $polygon->setDegrees((new Degrees)->setStart(0)->setEnd(45));
+                $captcha->add($polygon);
+
+                $color = (new Color)->setRed(new ColorLevel(0))->setGreen(new ColorLevel(255))->setBlue(new ColorLevel(0));
+                $polygon = (new Pie)->setColor($color)->setSize((new Size)->setWidth(50)->setHeight(50))->setCenter($center);
+                $polygon->setDegrees((new Degrees)->setStart(45)->setEnd(95));
+                $captcha->add($polygon);
+
+                $color = (new Color)
+                    ->setRed(new ColorLevel(0))
+                    ->setGreen(new ColorLevel(0))
+                    ->setBlue(new ColorLevel(255));
                 $polygon = (new Pie)
                     ->setColor($color)
-                    ->setDegrees(240)
                     ->setSize((new Size)->setWidth(50)->setHeight(50))
-                    ->setStartCoordinates((new Coordinates)->setX(75)->setY(45));
+                    ->setCenter($center);
+                $polygon->setDegrees((new Degrees)->setStart(95)->setEnd(195));
+                //$captcha->add($polygon);
                 break;
             case 'cercle':
-                $polygon = (new Cercle)->setColor($color)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize(50);
+                $polygon = (new Cercle)
+                    ->setColor($color)
+                    ->setCenter((new Coordinates)->setX(75)->setY(45))
+                    ->setSize(50);
                 break;
             case 'ellipse':
-                $polygon = (new Ellipse)->setColor($color)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize((new Size)->setWidth(100)->setHeight(50));
+                $polygon = (new Ellipse)
+                    ->setColor($color)
+                    ->setCenter((new Coordinates)->setX(75)->setY(45))
+                    ->setSize((new Size)->setWidth(100)->setHeight(50));
                 break;
             case 'square':
-                $polygon = (new Square)->setColor($color)->setStartCoordinates((new Coordinates)->setX(20)->setY(10))->setSize(50);
+                $polygon = (new Square)
+                    ->setColor($color)
+                    ->setStartCoordinates((new Coordinates)->setX(20)->setY(10))
+                    ->setSize(50);
                 break;
             case 'rectangle':
-                $polygon = (new Rectangle)->setColor($color)->setStartCoordinates((new Coordinates)->setX(20)->setY(10))->setSize((new Size)->setWidth(100)->setHeight(50));
+                $polygon = (new Rectangle)
+                    ->setColor($color)
+                    ->setStartCoordinates((new Coordinates)->setX(20)->setY(10))
+                    ->setSize((new Size)->setWidth(100)->setHeight(50));
                 break;
             case 'polygon':
                 $polygon = (new Polygon)->setColor($color)->setCoordinates(

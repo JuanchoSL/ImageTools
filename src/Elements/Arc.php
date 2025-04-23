@@ -4,15 +4,12 @@ namespace JuanchoSL\ImageTools\Elements;
 
 use GdImage;
 use JuanchoSL\ImageTools\Contracts\ApplicableInterface;
-use JuanchoSL\ImageTools\Contracts\EditableInterface;
-use JuanchoSL\ImageTools\Contracts\Invokable;
 use JuanchoSL\ImageTools\Contracts\InvokableInterface;
-use JuanchoSL\ImageTools\Contracts\ReadableInterface;
 use JuanchoSL\ImageTools\Dtos\Color;
 use JuanchoSL\ImageTools\Dtos\Coordinates;
+use JuanchoSL\ImageTools\Dtos\Degrees;
 use JuanchoSL\ImageTools\Dtos\Size;
 use JuanchoSL\ImageTools\Traits\PositionerTrait;
-use JuanchoSL\ImageTools\ValueObjects\TransparencyLevel;
 
 class Arc implements ApplicableInterface
 {
@@ -22,7 +19,7 @@ class Arc implements ApplicableInterface
     protected Color $text_color;
     protected Coordinates $start;
     protected Size $size;
-    protected int $degrees;
+    protected Degrees $degrees;
 
     public function setColor(Color $color): static
     {
@@ -35,7 +32,7 @@ class Arc implements ApplicableInterface
         return $this->text_color;
     }
 
-    public function setStartCoordinates(Coordinates $start): static
+    public function setCenter(Coordinates $start): static
     {
         $this->start = $start;
         return $this;
@@ -46,12 +43,12 @@ class Arc implements ApplicableInterface
         return $this;
     }
 
-    public function setDegrees(int $degrees): static
+    public function setDegrees(Degrees $degrees): static
     {
         $this->degrees = $degrees;
         return $this;
     }
-    public function getDegrees(): int
+    public function getDegrees(): Degrees
     {
         return $this->degrees;
     }
@@ -60,7 +57,16 @@ class Arc implements ApplicableInterface
         $imager = $image();
         $color = $this->getColor();
         $color = $color($image);
-        imagearc($imager, $this->start->getX(), $this->start->getY(), $this->size->getWidth(), $this->size->getHeight(), 0, $this->degrees, $color);
+        imagearc(
+            $imager,
+            $this->start->getX(),
+            $this->start->getY(),
+            $this->size->getWidth(),
+            $this->size->getHeight(),
+            $this->degrees->getStart(),
+            $this->degrees->getEnd(),
+            $color
+        );
         return $imager;
     }
 }

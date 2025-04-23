@@ -38,7 +38,7 @@ class Ellipse implements ApplicableInterface
         return $this->text_color;
     }
 
-    public function setStartCoordinates(Coordinates $start): static
+    public function setCenter(Coordinates $start): static
     {
         $this->start = $start;
         return $this;

@@ -36,7 +36,7 @@ class Cercle implements ApplicableInterface
         return $this->text_color;
     }
 
-    public function setStartCoordinates(Coordinates $start): static
+    public function setCenter(Coordinates $start): static
     {
         $this->start = $start;
         return $this;
@@ -49,7 +49,7 @@ class Cercle implements ApplicableInterface
 
     public function apply(InvokableInterface $image): GdImage
     {
-        $ellipse = (new Ellipse)->setColor($this->getColor())->setSize((new Size)->setWidth($this->size)->setHeight($this->size))->setStartCoordinates($this->start);
+        $ellipse = (new Ellipse)->setColor($this->getColor())->setSize((new Size)->setWidth($this->size)->setHeight($this->size))->setCenter($this->start);
         return $ellipse->apply($image);
         /*
         $imager = $image();
