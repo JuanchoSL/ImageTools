@@ -4,15 +4,11 @@ namespace JuanchoSL\ImageTools\Elements;
 
 use GdImage;
 use JuanchoSL\ImageTools\Contracts\ApplicableInterface;
-use JuanchoSL\ImageTools\Contracts\EditableInterface;
-use JuanchoSL\ImageTools\Contracts\Invokable;
 use JuanchoSL\ImageTools\Contracts\InvokableInterface;
-use JuanchoSL\ImageTools\Contracts\ReadableInterface;
 use JuanchoSL\ImageTools\Dtos\Color;
 use JuanchoSL\ImageTools\Dtos\Coordinates;
 use JuanchoSL\ImageTools\Dtos\Size;
 use JuanchoSL\ImageTools\Traits\PositionerTrait;
-use JuanchoSL\ImageTools\ValueObjects\TransparencyLevel;
 
 class Pie implements ApplicableInterface
 {

@@ -46,10 +46,10 @@ class FigureCommand extends UseCases
 
         $captcha = new PngImage($image());
         $color = (new Color)
-            ->setRed(new ColorLevel(0))
-            ->setGreen(new ColorLevel(0))
-            ->setBlue(new ColorLevel(0))
-            ->setAlpha(new TransparencyLevel(value: 110))
+            ->setRed(new ColorLevel(125))
+            ->setGreen(new ColorLevel(30))
+            ->setBlue(new ColorLevel(10))
+            ->setAlpha(new TransparencyLevel(value: 0))
         ;
 
         switch (strtolower($request->getAttribute('figure'))) {
@@ -77,8 +77,8 @@ class FigureCommand extends UseCases
                 $polygon = (new Pie)
                     ->setColor($color)
                     ->setDegrees(240)
-                    ->setSize((new Size)->setWidth(80)->setHeight(40))
-                    ->setStartCoordinates((new Coordinates)->setX(80)->setY(40));
+                    ->setSize((new Size)->setWidth(50)->setHeight(50))
+                    ->setStartCoordinates((new Coordinates)->setX(75)->setY(45));
                 break;
             case 'cercle':
                 $polygon = (new Cercle)->setColor($color)->setStartCoordinates((new Coordinates)->setX(75)->setY(45))->setSize(50);
